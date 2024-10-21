@@ -4,3 +4,4 @@ adding_model_cache.json
 jobs.sqlite
 f_ser.py
 venv/
+__pycache__
