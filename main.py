@@ -404,6 +404,7 @@ async def restore_from_apscheduler_store():
     launched = []
 
     for model, model_jobs in jobs_dict.items():
+        print(len(model_jobs))
         if len(jobs) == 1:
             end_job = model_jobs[-1]
             model, _ = end_job.args
