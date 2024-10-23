@@ -405,7 +405,7 @@ async def restore_from_apscheduler_store():
 
     for model, model_jobs in jobs_dict.items():
         print(len(model_jobs))
-        if len(jobs) == 1:
+        if len(model_jobs) == 1:
             end_job = model_jobs[-1]
             model, _ = end_job.args
 
@@ -426,7 +426,7 @@ async def restore_from_apscheduler_store():
                     'online': False
                 })
 
-        elif len(jobs) == 2:
+        elif len(model_jobs) == 2:
             start_job: Job = min(model_jobs, key=lambda item: item.next_run_time)
             end_job: Job = max(model_jobs, key=lambda item: item.next_run_time)
             print(jobs, 'resporing 2')
