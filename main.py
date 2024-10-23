@@ -411,6 +411,8 @@ async def restore_from_apscheduler_store():
             start_job_json = cache.get(model)
             if start_job_json is None: continue
 
+            print(start_job_json, 'restoring_jobs')
+
             start_time = datetime.fromisoformat(start_job_json['start_time'])
             if start_time < end_job.next_run_time:
                 launched.append({
@@ -426,7 +428,7 @@ async def restore_from_apscheduler_store():
         elif len(jobs) == 2:
             start_job: Job = min(model_jobs, key=lambda item: item.next_run_time)
             end_job: Job = max(model_jobs, key=lambda item: item.next_run_time)
-
+            print(jobs, 'resporing 2')
             model, count = start_job.args
             restoring_schedules.append({
                 'start_time': start_job.next_run_time,
@@ -472,6 +474,8 @@ async def main() -> None:
     # получение данных расписания и добавление в global schedules
     launched, restoring_schedules = await restore_from_apscheduler_store()
     schedules.extend(restoring_schedules)
+
+    print(schedules)
 
     for schedule in launched:
         # запуск уже ранее запущенных расписаний
